@@ -35,7 +35,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-
+import javax.swing.table.TableModel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
@@ -48,6 +48,10 @@ public class AlquilerBici {
 	private JTextField textFieldNombre;
 	private JTextField textFieldCrearUsuario;
 	private JTextField textFieldcrearBici;
+	private JScrollPane scrollPaneUsuario;
+	private JScrollPane scrollPaneBici;
+	private JTextField textFieldIdActualizarUsuario;
+	private JTextField textFieldNombreActualizarUsuario;
 
 	/**
 	 * Launch the application.
@@ -81,7 +85,7 @@ public class AlquilerBici {
 		alquilerBici = new JFrame();
 		alquilerBici.setTitle("Alquilar Bici");
 		alquilerBici.getContentPane().setBackground(new Color(255, 235, 205));
-		alquilerBici.setBounds(100, 100, 929, 574);
+		alquilerBici.setBounds(100, 100, 976, 755);
 		alquilerBici.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		alquilerBici.getContentPane().setLayout(null);
 
@@ -132,49 +136,52 @@ public class AlquilerBici {
 
 		});
 
-		JLabel lblAlquilarBici = new JLabel("ALQUILAR BICI");
-		lblAlquilarBici.setFont(new Font("Arial", Font.BOLD, 16));
-		lblAlquilarBici.setBounds(704, 70, 181, 14);
+		JLabel lblAlquilarBici = new JLabel("Alquilar bici:");
+		lblAlquilarBici.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblAlquilarBici.setBounds(704, 322, 181, 14);
 		alquilerBici.getContentPane().add(lblAlquilarBici);
 
 		JLabel lblidBici = new JLabel("idBici");
 		lblidBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidBici.setBounds(694, 109, 84, 14);
+		lblidBici.setBounds(704, 347, 84, 14);
 		alquilerBici.getContentPane().add(lblidBici);
 
 		JLabel lbliduUsuarioAlquilar = new JLabel("idUsuario");
 		lbliduUsuarioAlquilar.setFont(new Font("Arial", Font.BOLD, 12));
-		lbliduUsuarioAlquilar.setBounds(694, 134, 88, 14);
+		lbliduUsuarioAlquilar.setBounds(704, 372, 88, 14);
 		alquilerBici.getContentPane().add(lbliduUsuarioAlquilar);
 
 		JComboBox comboBoxidBiciAlquilar = new JComboBox();
-		comboBoxidBiciAlquilar.setBounds(785, 101, 86, 22);
+		comboBoxidBiciAlquilar.setBounds(795, 339, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidBiciAlquilar);
 
 		JComboBox comboBoxidUsuarioAlquilar = new JComboBox();
-		comboBoxidUsuarioAlquilar.setBounds(785, 126, 86, 22);
+		comboBoxidUsuarioAlquilar.setBounds(795, 364, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidUsuarioAlquilar);
 
-		JLabel lblDevolverBici = new JLabel("DEVOLVER BICI");
-		lblDevolverBici.setFont(new Font("Arial", Font.BOLD, 16));
-		lblDevolverBici.setBounds(704, 251, 153, 14);
+		JLabel lblDevolverBici = new JLabel("Devolver Bici");
+		lblDevolverBici.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblDevolverBici.setBounds(714, 433, 153, 14);
 		alquilerBici.getContentPane().add(lblDevolverBici);
 
 		JLabel lblidUsuarioDevolver = new JLabel("idUsuario");
 		lblidUsuarioDevolver.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidUsuarioDevolver.setBounds(694, 292, 88, 14);
+		lblidUsuarioDevolver.setBounds(704, 463, 88, 14);
 		alquilerBici.getContentPane().add(lblidUsuarioDevolver);
 
 		JComboBox comboBoxIdUsuarioDevolver = new JComboBox();
-		comboBoxIdUsuarioDevolver.setBounds(785, 288, 86, 22);
+		comboBoxIdUsuarioDevolver.setBounds(795, 458, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxIdUsuarioDevolver);
 
-		JScrollPane scrollPaneUsuario = new JScrollPane(tableUsuario);
-		scrollPaneUsuario.setBounds(10, 95, 281, 182);
+		scrollPaneUsuario = new JScrollPane(tableUsuario);
+		scrollPaneUsuario.setForeground(new Color(153, 0, 51));
+		scrollPaneUsuario.setBorder(new LineBorder(new Color(128, 0, 0), 3));
+		scrollPaneUsuario.setBounds(157, 83, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneUsuario);
 
-		JScrollPane scrollPaneBici = new JScrollPane(tableBici);
-		scrollPaneBici.setBounds(343, 95, 281, 182);
+		scrollPaneBici = new JScrollPane(tableBici);
+		scrollPaneBici.setBorder(new LineBorder(new Color(153, 0, 0), 3));
+		scrollPaneBici.setBounds(490, 83, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneBici);
 
 		JLabel lblIdbicicrear = new JLabel("idBiciCrear");
@@ -189,41 +196,72 @@ public class AlquilerBici {
 
 		JLabel lblborrarUsuario = new JLabel("Borrar usuario:");
 		lblborrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblborrarUsuario.setBounds(10, 432, 106, 15);
+		lblborrarUsuario.setBounds(10, 432, 130, 15);
 		alquilerBici.getContentPane().add(lblborrarUsuario);
 
 		JComboBox comboBoxborrarUsuario = new JComboBox();
-		comboBoxborrarUsuario.setBounds(141, 455, 86, 22);
+		comboBoxborrarUsuario.setBounds(170, 458, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxborrarUsuario);
 
 		JLabel lblElegirBici = new JLabel("Elegir bici:");
 		lblElegirBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblElegirBici.setBounds(379, 445, 106, 15);
+		lblElegirBici.setBounds(379, 462, 106, 15);
 		alquilerBici.getContentPane().add(lblElegirBici);
 
 		JComboBox comboBoxborrarBici = new JComboBox();
-		comboBoxborrarBici.setBounds(483, 441, 86, 22);
+		comboBoxborrarBici.setBounds(483, 458, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxborrarBici);
 
 		JLabel lblElegirUsuario = new JLabel("Elegir Usuario");
 		lblElegirUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblElegirUsuario.setBounds(50, 463, 90, 14);
+		lblElegirUsuario.setBounds(50, 463, 113, 14);
 		alquilerBici.getContentPane().add(lblElegirUsuario);
 
 		JLabel lblUsuario = new JLabel("USUARIO");
 		lblUsuario.setFont(new Font("Arial", Font.BOLD, 16));
-		lblUsuario.setBounds(110, 70, 81, 14);
+		lblUsuario.setBounds(257, 58, 81, 14);
 		alquilerBici.getContentPane().add(lblUsuario);
 
 		JLabel lblBici = new JLabel("BICICLETA");
 		lblBici.setFont(new Font("Arial", Font.BOLD, 16));
-		lblBici.setBounds(437, 70, 93, 14);
+		lblBici.setBounds(584, 58, 93, 14);
 		alquilerBici.getContentPane().add(lblBici);
 
 		JLabel lblBorrarBici = new JLabel("Borrar bici:");
 		lblBorrarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblBorrarBici.setBounds(343, 418, 106, 15);
+		lblBorrarBici.setBounds(343, 432, 106, 15);
 		alquilerBici.getContentPane().add(lblBorrarBici);
+		
+		JLabel lblActualizarUsuario = new JLabel("Actualizar Usuario");
+		lblActualizarUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblActualizarUsuario.setBounds(316, 567, 153, 14);
+		alquilerBici.getContentPane().add(lblActualizarUsuario);
+		
+		JLabel lblnombreUsuario_1 = new JLabel("Nombre");
+		lblnombreUsuario_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblnombreUsuario_1.setBounds(344, 599, 81, 14);
+		alquilerBici.getContentPane().add(lblnombreUsuario_1);
+		
+		JLabel lblidUsuarioCrear_1 = new JLabel("idUsuario");
+		lblidUsuarioCrear_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblidUsuarioCrear_1.setBounds(344, 624, 115, 14);
+		alquilerBici.getContentPane().add(lblidUsuarioCrear_1);
+		
+		textFieldIdActualizarUsuario = new JTextField();
+		textFieldIdActualizarUsuario.setEnabled(false);
+		textFieldIdActualizarUsuario.setColumns(10);
+		textFieldIdActualizarUsuario.setBounds(435, 618, 86, 20);
+		alquilerBici.getContentPane().add(textFieldIdActualizarUsuario);
+		
+		textFieldNombreActualizarUsuario = new JTextField();
+		textFieldNombreActualizarUsuario.setColumns(10);
+		textFieldNombreActualizarUsuario.setBounds(435, 593, 86, 20);
+		alquilerBici.getContentPane().add(textFieldNombreActualizarUsuario);
+		
+		JButton btnActualizarUsuario = new JButton("Actualizar Usuario");
+		btnActualizarUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnActualizarUsuario.setBounds(354, 650, 167, 23);
+		alquilerBici.getContentPane().add(btnActualizarUsuario);
 
 		DefaultTableModel modelUsuario = new DefaultTableModel();
 		modelUsuario.addColumn("Código");
@@ -268,7 +306,7 @@ public class AlquilerBici {
 			}
 		});
 		btnMostrarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		btnMostrarBici.setBounds(407, 288, 153, 23);
+		btnMostrarBici.setBounds(554, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnMostrarBici);
 
 		
@@ -308,7 +346,7 @@ public class AlquilerBici {
 			}
 		});
 		btnmostrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		btnmostrarUsuario.setBounds(74, 288, 153, 23);
+		btnmostrarUsuario.setBounds(221, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
 		
 		
@@ -335,7 +373,7 @@ public class AlquilerBici {
 			}
 		});
 		btnborrarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		btnborrarBici.setBounds(407, 472, 153, 23);
+		btnborrarBici.setBounds(407, 498, 153, 23);
 		alquilerBici.getContentPane().add(btnborrarBici);
 		
 		comboBoxborrarBici.addMouseListener(new MouseAdapter() {
@@ -479,7 +517,7 @@ public class AlquilerBici {
 				}
 			}
 		});
-		btnAlquilar.setBounds(704, 170, 160, 23);
+		btnAlquilar.setBounds(714, 400, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
 		
 		comboBoxidBiciAlquilar.addMouseListener(new MouseAdapter() {
@@ -591,7 +629,7 @@ public class AlquilerBici {
 
 			}
 		});
-		btnDevolver.setBounds(711, 322, 160, 23);
+		btnDevolver.setBounds(721, 498, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
 		
 		comboBoxIdUsuarioDevolver.addMouseListener(new MouseAdapter() {
@@ -646,7 +684,7 @@ public class AlquilerBici {
 				btnMostrarBici.doClick();
 			}
 		});
-		btnCrearBici.setBounds(407, 368, 153, 23);
+		btnCrearBici.setBounds(407, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearBici);
 
 		JButton btnBotonBorrarUsuario = new JButton("Borrar Usuario");
@@ -676,6 +714,8 @@ public class AlquilerBici {
 		btnBotonBorrarUsuario.setBounds(74, 498, 153, 23);
 		alquilerBici.getContentPane().add(btnBotonBorrarUsuario);
 		
+		
+		
 		comboBoxborrarUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -691,6 +731,38 @@ public class AlquilerBici {
 				}catch(SQLException e1) {
 					
 				}
+			}
+		});
+		
+		
+		tableUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = tableUsuario.getSelectedRow();
+				TableModel model = tableUsuario.getModel();
+				textFieldIdActualizarUsuario.setText(model.getValueAt(index, 0).toString());
+				textFieldNombreActualizarUsuario.setText(model.getValueAt(index, 1).toString());
+			}
+		});
+		
+		btnActualizarUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					Connection con = ConnectionSingleton.getConnection();
+					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET nombre = ? WHERE idusuario = ?");
+					dele_pstmt.setString(1, textFieldNombreActualizarUsuario.getText());
+					dele_pstmt.setInt(2, Integer.parseInt(textFieldIdActualizarUsuario.getText()));
+					dele_pstmt.executeUpdate();
+					dele_pstmt.close();
+					btnmostrarUsuario.doClick();
+					
+				}catch(SQLException e1) {
+					
+				}
+				
+				
 			}
 		});
 
