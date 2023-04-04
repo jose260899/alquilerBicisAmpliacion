@@ -49,7 +49,6 @@ public class AlquilerBici {
 	private JTextField textFieldCrearUsuario;
 	private JTextField textFieldcrearBici;
 	private JScrollPane scrollPaneUsuario;
-	private JScrollPane scrollPaneBici;
 	private JTextField textFieldIdActualizarUsuario;
 	private JTextField textFieldNombreActualizarUsuario;
 
@@ -179,8 +178,8 @@ public class AlquilerBici {
 		scrollPaneUsuario.setBounds(157, 83, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneUsuario);
 
-		scrollPaneBici = new JScrollPane(tableBici);
-		scrollPaneBici.setBorder(new LineBorder(new Color(153, 0, 0), 3));
+		JScrollPane scrollPaneBici = new JScrollPane(tableBici);
+		scrollPaneBici.setBorder(new LineBorder(new Color(128, 0, 0), 3));
 		scrollPaneBici.setBounds(490, 83, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneBici);
 
