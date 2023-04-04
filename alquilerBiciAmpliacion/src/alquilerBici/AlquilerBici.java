@@ -40,6 +40,11 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
 
+/**
+ * Clase AlquilerBici utilizada para realizar un alquiler de una bici
+ * @author Mónica Alcañiz y José Ayalá
+ *@version 04-04-2023
+ */
 public class AlquilerBici {
 
 	private JFrame alquilerBici;
@@ -80,7 +85,9 @@ public class AlquilerBici {
 	 */
 
 	private void initialize() {
-
+		/**
+		 * Declaración de las variables y objetos que conforman la interfaz gráfica
+		 */
 		alquilerBici = new JFrame();
 		alquilerBici.setTitle("Alquilar Bici");
 		alquilerBici.getContentPane().setBackground(new Color(255, 235, 205));
@@ -122,7 +129,9 @@ public class AlquilerBici {
 		textFieldNombre.setBounds(141, 341, 86, 20);
 		alquilerBici.getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
-
+/**
+ * Método listener de eventos de foco utilizado para comprobar si el contenido del textFieldNombre es correcto
+ */
 		textFieldNombre.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -262,6 +271,7 @@ public class AlquilerBici {
 		btnActualizarUsuario.setBounds(354, 650, 167, 23);
 		alquilerBici.getContentPane().add(btnActualizarUsuario);
 
+		
 		DefaultTableModel modelUsuario = new DefaultTableModel();
 		modelUsuario.addColumn("Código");
 		modelUsuario.addColumn("Nombre");
