@@ -202,6 +202,10 @@ public class AlquilerBici {
 		textFieldcrearBici.setColumns(10);
 		textFieldcrearBici.setBounds(483, 341, 86, 20);
 		alquilerBici.getContentPane().add(textFieldcrearBici);
+		
+		JButton btnAyuda = new JButton("Ayuda");
+		btnAyuda.setBounds(14, 667, 88, 25);
+		alquilerBici.getContentPane().add(btnAyuda);
 
 		JLabel lblborrarUsuario = new JLabel("Borrar usuario:");
 		lblborrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
@@ -839,6 +843,8 @@ public class AlquilerBici {
 		
 		
 		btnActualizarUsuario.setMnemonic(KeyEvent.VK_T);
+		
+		
 		/*
 		 * Evento al pulsar actualizar usuario, hace una sentencia SQL para actualizar al usuario
 		 * y actualiza la tabla
@@ -869,6 +875,12 @@ public class AlquilerBici {
 				}
 				
 				}
+			}
+		});
+		btnAyuda.setMnemonic(KeyEvent.VK_Y);
+		btnAyuda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Ayuda\n0 = Libre\n1 = Ocupada");
 			}
 		});
 	}
