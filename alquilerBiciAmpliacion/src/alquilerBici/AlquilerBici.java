@@ -317,6 +317,7 @@ public class AlquilerBici {
 		btnMostrarBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnMostrarBici.setBounds(554, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnMostrarBici);
+		btnMostrarBici.doClick();
 
 		
 		JButton btnmostrarUsuario = new JButton("Mostrar Usuario");
@@ -357,6 +358,7 @@ public class AlquilerBici {
 		btnmostrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnmostrarUsuario.setBounds(221, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
+		btnmostrarUsuario.doClick();
 		
 		
 		JButton btnborrarBici = new JButton("Borrar Bici");
