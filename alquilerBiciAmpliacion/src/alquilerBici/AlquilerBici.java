@@ -167,9 +167,9 @@ public class AlquilerBici {
 		comboBoxidUsuarioAlquilar.setBounds(795, 364, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidUsuarioAlquilar);
 
-		JLabel lblDevolverBici = new JLabel("Devolver Bici");
+		JLabel lblDevolverBici = new JLabel("Devolver Bici:");
 		lblDevolverBici.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblDevolverBici.setBounds(714, 433, 153, 14);
+		lblDevolverBici.setBounds(704, 433, 153, 14);
 		alquilerBici.getContentPane().add(lblDevolverBici);
 
 		JLabel lblidUsuarioDevolver = new JLabel("idUsuario");
@@ -240,35 +240,35 @@ public class AlquilerBici {
 		lblBorrarBici.setBounds(343, 432, 106, 15);
 		alquilerBici.getContentPane().add(lblBorrarBici);
 		
-		JLabel lblActualizarUsuario = new JLabel("Actualizar Usuario");
+		JLabel lblActualizarUsuario = new JLabel("Actualizar Usuario:");
 		lblActualizarUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblActualizarUsuario.setBounds(316, 567, 153, 14);
+		lblActualizarUsuario.setBounds(343, 567, 153, 14);
 		alquilerBici.getContentPane().add(lblActualizarUsuario);
 		
 		JLabel lblnombreUsuario_1 = new JLabel("Nombre");
 		lblnombreUsuario_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblnombreUsuario_1.setBounds(344, 599, 81, 14);
+		lblnombreUsuario_1.setBounds(379, 599, 81, 14);
 		alquilerBici.getContentPane().add(lblnombreUsuario_1);
 		
 		JLabel lblidUsuarioCrear_1 = new JLabel("idUsuario");
 		lblidUsuarioCrear_1.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblidUsuarioCrear_1.setBounds(344, 624, 115, 14);
+		lblidUsuarioCrear_1.setBounds(379, 624, 115, 14);
 		alquilerBici.getContentPane().add(lblidUsuarioCrear_1);
 		
 		textFieldIdActualizarUsuario = new JTextField();
 		textFieldIdActualizarUsuario.setEnabled(false);
 		textFieldIdActualizarUsuario.setColumns(10);
-		textFieldIdActualizarUsuario.setBounds(435, 618, 86, 20);
+		textFieldIdActualizarUsuario.setBounds(483, 618, 86, 20);
 		alquilerBici.getContentPane().add(textFieldIdActualizarUsuario);
 		
 		textFieldNombreActualizarUsuario = new JTextField();
 		textFieldNombreActualizarUsuario.setColumns(10);
-		textFieldNombreActualizarUsuario.setBounds(435, 593, 86, 20);
+		textFieldNombreActualizarUsuario.setBounds(483, 593, 86, 20);
 		alquilerBici.getContentPane().add(textFieldNombreActualizarUsuario);
 		
 		JButton btnActualizarUsuario = new JButton("Actualizar Usuario");
 		btnActualizarUsuario.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnActualizarUsuario.setBounds(354, 650, 167, 23);
+		btnActualizarUsuario.setBounds(400, 650, 167, 23);
 		alquilerBici.getContentPane().add(btnActualizarUsuario);
 
 		
@@ -834,7 +834,11 @@ public class AlquilerBici {
 		btnActualizarUsuario.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if(textFieldNombreActualizarUsuario.getText().isEmpty()) {
+					textFieldIdActualizarUsuario.setText("");
+					textFieldNombreActualizarUsuario.setText("");
+					JOptionPane.showMessageDialog(null, "No se puede actualizar el usuario");
+				}else {
 				try {
 					Connection con = ConnectionSingleton.getConnection();
 					PreparedStatement updtUsuario = con.prepareStatement("UPDATE usuario SET nombre = ? WHERE idusuario = ?");
@@ -843,12 +847,17 @@ public class AlquilerBici {
 					updtUsuario.executeUpdate();
 					updtUsuario.close();
 					btnmostrarUsuario.doClick();
+					textFieldIdActualizarUsuario.setText("");
+					textFieldNombreActualizarUsuario.setText("");
+					JOptionPane.showMessageDialog(null, "Usuario actualizado correctamente");
 					
 				}catch(SQLException e1) {
-					
+					JOptionPane.showMessageDialog(null, e1.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+				}catch(NumberFormatException e2) {
+					JOptionPane.showMessageDialog(null, "Casillas vacías", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				
-				
+				}
 			}
 		});
 
