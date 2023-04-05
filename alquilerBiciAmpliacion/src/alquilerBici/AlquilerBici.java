@@ -312,7 +312,6 @@ public class AlquilerBici {
 
 					tableBici.setModel(modelBici);
 					tableBici.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-					con.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -377,10 +376,10 @@ public class AlquilerBici {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement dele_pstmt = con.prepareStatement("DELETE FROM bici WHERE idbici = ? ");
-					dele_pstmt.setInt(1, (int) comboBoxborrarBici.getSelectedItem());
-					int rowsDeleted = dele_pstmt.executeUpdate();
-					dele_pstmt.close();
+					PreparedStatement deleBici = con.prepareStatement("DELETE FROM bici WHERE idbici = ? ");
+					deleBici.setInt(1, (int) comboBoxborrarBici.getSelectedItem());
+					int rowsDeleted = deleBici.executeUpdate();
+					deleBici.close();
 					btnMostrarBici.doClick();
 					JOptionPane.showMessageDialog(null, "Bici eliminada correctamente");
 
@@ -426,6 +425,14 @@ public class AlquilerBici {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					Connection con = ConnectionSingleton.getConnection();
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+
 				alquilerBici.dispose();
 			}
 		});
@@ -455,11 +462,11 @@ public class AlquilerBici {
 					try {
 
 						Connection con = ConnectionSingleton.getConnection();
-						PreparedStatement ins_pstmt = con.prepareStatement("INSERT INTO usuario (nombre, idusuario)  VALUES (?,?)");
-						ins_pstmt.setString(1, textFieldNombre.getText());
-						ins_pstmt.setInt(2, Integer.parseInt(textFieldCrearUsuario.getText()));
-						int rowsInserted = ins_pstmt.executeUpdate();
-						ins_pstmt.close();
+						PreparedStatement insUsuario = con.prepareStatement("INSERT INTO usuario (nombre, idusuario)  VALUES (?,?)");
+						insUsuario.setString(1, textFieldNombre.getText());
+						insUsuario.setInt(2, Integer.parseInt(textFieldCrearUsuario.getText()));
+						int rowsInserted = insUsuario.executeUpdate();
+						insUsuario.close();
 						btnmostrarUsuario.doClick();
 						JOptionPane.showMessageDialog(null, "Usuario creado correctamente");
 						textFieldNombre.setText("");
@@ -621,16 +628,16 @@ public class AlquilerBici {
 					PreparedStatement foreign = con.prepareStatement( "SET FOREIGN_KEY_CHECKS=0;");
 					foreign.executeUpdate();
 					
-					PreparedStatement dele_pstmt2 = con.prepareStatement("UPDATE bici SET disponibilidad = 0 WHERE idbici = (SELECT bici_idbici FROM usuario WHERE idusuario = ?);");
-					dele_pstmt2.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
+					PreparedStatement updtBici = con.prepareStatement("UPDATE bici SET disponibilidad = 0 WHERE idbici = (SELECT bici_idbici FROM usuario WHERE idusuario = ?);");
+					updtBici.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
 					
-					dele_pstmt2.executeUpdate();
-					dele_pstmt2.close();
+					updtBici.executeUpdate();
+					updtBici.close();
 					
-					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
-					dele_pstmt.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
-					dele_pstmt.executeUpdate();
-					dele_pstmt.close();
+					PreparedStatement updtUsuario = con.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
+					updtUsuario.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
+					updtUsuario.executeUpdate();
+					updtUsuario.close();
 					
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
@@ -726,11 +733,11 @@ public class AlquilerBici {
 				try {
 
 					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement ins_pstmt = con
+					PreparedStatement insBici = con
 							.prepareStatement("INSERT INTO bici (idbici, disponibilidad)  VALUES (?,0)");
-					ins_pstmt.setInt(1, Integer.parseInt(textFieldcrearBici.getText()));
-					int rowsInserted = ins_pstmt.executeUpdate();
-					ins_pstmt.close();
+					insBici.setInt(1, Integer.parseInt(textFieldcrearBici.getText()));
+					int rowsInserted = insBici.executeUpdate();
+					insBici.close();
 					JOptionPane.showMessageDialog(null, "Bici creada correctamente");
 					textFieldcrearBici.setText("");
 
@@ -761,11 +768,11 @@ public class AlquilerBici {
 
 				try {
 					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement dele_pstmt = con.prepareStatement("DELETE FROM usuario WHERE idusuario = ? ");
-					dele_pstmt.setInt(1, (int) comboBoxborrarUsuario.getSelectedItem());
+					PreparedStatement deleUsuario = con.prepareStatement("DELETE FROM usuario WHERE idusuario = ? ");
+					deleUsuario.setInt(1, (int) comboBoxborrarUsuario.getSelectedItem());
 
-					int rowsDeleted = dele_pstmt.executeUpdate();
-					dele_pstmt.close();
+					int rowsDeleted = deleUsuario.executeUpdate();
+					deleUsuario.close();
 					JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
 
 				} catch (SQLException e3) {
@@ -830,11 +837,11 @@ public class AlquilerBici {
 				
 				try {
 					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET nombre = ? WHERE idusuario = ?");
-					dele_pstmt.setString(1, textFieldNombreActualizarUsuario.getText());
-					dele_pstmt.setInt(2, Integer.parseInt(textFieldIdActualizarUsuario.getText()));
-					dele_pstmt.executeUpdate();
-					dele_pstmt.close();
+					PreparedStatement updtUsuario = con.prepareStatement("UPDATE usuario SET nombre = ? WHERE idusuario = ?");
+					updtUsuario.setString(1, textFieldNombreActualizarUsuario.getText());
+					updtUsuario.setInt(2, Integer.parseInt(textFieldIdActualizarUsuario.getText()));
+					updtUsuario.executeUpdate();
+					updtUsuario.close();
 					btnmostrarUsuario.doClick();
 					
 				}catch(SQLException e1) {
