@@ -321,6 +321,7 @@ public class AlquilerBici {
 		btnMostrarBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnMostrarBici.setBounds(554, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnMostrarBici);
+		btnMostrarBici.setVisible(false);
 		btnMostrarBici.doClick();
 
 		/*
@@ -366,6 +367,7 @@ public class AlquilerBici {
 		btnmostrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnmostrarUsuario.setBounds(221, 276, 153, 23);
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
+		btnmostrarUsuario.setVisible(false);
 		btnmostrarUsuario.doClick();
 		
 		/*
