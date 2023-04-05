@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
@@ -396,6 +397,7 @@ public class AlquilerBici {
 		btnborrarBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnborrarBici.setBounds(407, 498, 153, 23);
 		alquilerBici.getContentPane().add(btnborrarBici);
+		btnborrarBici.setMnemonic(KeyEvent.VK_I);
 		
 		/*
 		 * Evento al pulsar el comboBox de borrar bici, hace una consulta SQL
@@ -439,6 +441,7 @@ public class AlquilerBici {
 
 		btnSalir.setBounds(789, 22, 89, 23);
 		alquilerBici.getContentPane().add(btnSalir);
+		btnSalir.setMnemonic(KeyEvent.VK_L);
 
 		textFieldCrearUsuario = new JTextField();
 		textFieldCrearUsuario.setColumns(10);
@@ -489,7 +492,8 @@ public class AlquilerBici {
 		});
 		btnCrearUsuario.setBounds(74, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearUsuario);
-
+		btnCrearUsuario.setMnemonic(KeyEvent.VK_U);
+		
 		/*
 		 * Botón de alquilar bici, hace updates del usuario y de la bici para que tengan una bici alquilada.
 		 * Después se actualiza la tabla para que el usuario y bici estén ocupadas.
@@ -565,6 +569,7 @@ public class AlquilerBici {
 		});
 		btnAlquilar.setBounds(714, 400, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
+		btnAlquilar.setMnemonic(KeyEvent.VK_A);
 		
 		/*
 		 * Evento al pulsar el comboBox de alquilar bici, lo que hace es una consulta SQL
@@ -690,6 +695,7 @@ public class AlquilerBici {
 		});
 		btnDevolver.setBounds(721, 498, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
+		btnDevolver.setMnemonic(KeyEvent.VK_D);
 		
 		/*
 		 * Evento al pulsar el comboBox de devolver bici, hace una consulta sql
@@ -755,7 +761,7 @@ public class AlquilerBici {
 		});
 		btnCrearBici.setBounds(407, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearBici);
-
+		btnCrearBici.setMnemonic(KeyEvent.VK_B);
 		
 		/*
 		 * Borrar botón, lo que hace es coger el el valor del comboBox
@@ -787,6 +793,7 @@ public class AlquilerBici {
 		});
 		btnBotonBorrarUsuario.setBounds(74, 498, 153, 23);
 		alquilerBici.getContentPane().add(btnBotonBorrarUsuario);
+		btnBotonBorrarUsuario.setMnemonic(KeyEvent.VK_S);
 		
 		
 		/*
@@ -827,14 +834,16 @@ public class AlquilerBici {
 			}
 		});
 		
+		
+		
+		btnActualizarUsuario.setMnemonic(KeyEvent.VK_T);
 		/*
 		 * Evento al pulsar actualizar usuario, hace una sentencia SQL para actualizar al usuario
 		 * y actualiza la tabla
 		 * */
-		btnActualizarUsuario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				if(textFieldNombreActualizarUsuario.getText().isEmpty()) {
+		btnActualizarUsuario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(textFieldNombreActualizarUsuario.getText().isEmpty() && textFieldIdActualizarUsuario.getText().isEmpty()) {
 					textFieldIdActualizarUsuario.setText("");
 					textFieldNombreActualizarUsuario.setText("");
 					JOptionPane.showMessageDialog(null, "No se puede actualizar el usuario");
@@ -860,6 +869,5 @@ public class AlquilerBici {
 				}
 			}
 		});
-
 	}
 }
